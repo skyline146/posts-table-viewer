@@ -7,17 +7,15 @@ import {
   Paper,
   TableBody,
 } from "@mui/material";
-import { useAppDispatch } from "../../store/hooks";
-import { sortPosts } from "../../store/posts-slice";
 import { Post } from "../../ts";
 import "./style.css";
 
 interface PostsTableProps {
   data: Post[];
+  onSort: (type: string) => void;
 }
 
-export const PostsTable = ({ data }: PostsTableProps) => {
-  const dispatch = useAppDispatch();
+export const PostsTable = ({ data, onSort }: PostsTableProps) => {
 
   return (
     <TableContainer component={Paper} sx={{ marginTop: 2 }}>
@@ -25,19 +23,19 @@ export const PostsTable = ({ data }: PostsTableProps) => {
         <TableHead>
           <TableRow sx={{ backgroundColor: "#5A5C66" }}>
             <TableCell
-              onClick={() => dispatch(sortPosts("id"))}
+              onClick={() => onSort("id")}
               className="head-button"
             >
               ID
             </TableCell>
             <TableCell
-              onClick={() => dispatch(sortPosts("title"))}
+              onClick={() => onSort("title")}
               className="head-button"
             >
               Заголовок
             </TableCell>
             <TableCell
-              onClick={() => dispatch(sortPosts("body"))}
+              onClick={() => onSort("body")}
               className="head-button"
             >
               Описание
